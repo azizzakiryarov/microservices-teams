@@ -35,11 +35,18 @@ public final class Team {
 		this.teamState = teamState;
 	}
 
-	public Team(String teamName, String teamDescription, se.azza.teamservice.constants.States.teamState teamState) {
+	public Team(String teamName, String teamDescription, teamState teamState) {
 		super();
 		this.teamName = teamName;
 		this.teamDescription = teamDescription;
 		this.teamState = teamState;
+	}
+
+	public Team(String teamName, String teamDescription) {
+		super();
+		this.teamName = teamName;
+		this.teamDescription = teamDescription;
+		this.teamState = se.azza.teamservice.constants.States.teamState.NEW;
 	}
 
 	public long getId() {

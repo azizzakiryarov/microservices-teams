@@ -1,20 +1,16 @@
 package se.azza.teamservice.constants;
 
 public class States {
-	
+
 	public enum userState {
-		ACTIVE,
-		INACTIVE
+		ACTIVE, INACTIVE
 	}
 
 	public enum userRole {
-		ADMIN,
-		USER
+		ADMIN, USER, DEVELOPER, SCRUM_MASTER, TEAM_MANAGER
 	}
-	
-	public enum teamState{
-		NEW, 
-		ACTIVE,
-		INACTIVE
+
+	public enum teamState {
+		NEW, ACTIVE, INACTIVE
 	}
 }
