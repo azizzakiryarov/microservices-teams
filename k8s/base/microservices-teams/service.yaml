@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: microservices-teams
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: teams
   ports:
