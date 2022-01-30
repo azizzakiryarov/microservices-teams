@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class TeamServiceApplication {
 
 	@Bean
-	@LoadBalanced
+	//@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
