@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.azza</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>teams-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-service</name>
+	<name>teams-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

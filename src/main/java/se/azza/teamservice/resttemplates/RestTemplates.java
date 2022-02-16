@@ -13,6 +13,6 @@ public class RestTemplates {
 
 	public static List<User> getAllUsersFor(RestTemplate restTemplate, Long teamId) {
 		return Arrays.asList(
-				restTemplate.getForObject("http://MICROSERVICES-USERS/users/getAllUsersFor/" + teamId, User[].class));
+				restTemplate.getForObject("http://microservices-users-deployment-0.microservices-users.microservices.svc.cluster.local:8081/users/getAllUsersFor/" + teamId, User[].class));
 	}
 }
