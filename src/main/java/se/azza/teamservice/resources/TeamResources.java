@@ -40,14 +40,14 @@ public class TeamResources {
 	public ResponseEntity<Team> addTeam(@RequestParam(value = "teamName") String teamName,
 			@RequestParam(value = "teamDescription") String teamDescription) {
 		Team newTeam = teamService.createTeam(new Team(teamName, teamDescription));
-		return new ResponseEntity<Team>(newTeam, HttpStatus.CREATED);
+		return new ResponseEntity<>(newTeam, HttpStatus.CREATED);
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping(path = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Team> getTeam(@PathVariable(value = "id") Long id) {
 		Optional<Team> team = teamService.getTeamById(id);
-		return new ResponseEntity<Team>(team.get(), HttpStatus.OK);
+		return team.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
 	}
 
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -57,16 +57,19 @@ public class TeamResources {
 			@RequestParam(value = "teamDescription") String teamDescription,
 			@RequestParam(value = "teamState") teamState teamState) {
 		Optional<Team> currentTeam = teamService.getTeamById(id);
-		Team updatedTeam = new Team(currentTeam.get().getId(), teamName, teamDescription, teamState);
-		teamRepository.save(updatedTeam);
-		return new ResponseEntity<Team>(updatedTeam, HttpStatus.OK);
+		if (currentTeam.isPresent()) {
+			Team updatedTeam = new Team(currentTeam.get().getId(), teamName, teamDescription, teamState);
+			teamRepository.save(updatedTeam);
+			return new ResponseEntity<>(updatedTeam, HttpStatus.OK);
+		}
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping(path = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Team>> getAllTeams() {
 		List<Team> teams = teamService.getAllTeams();
-		return new ResponseEntity<List<Team>>(teams, HttpStatus.OK);
+		return new ResponseEntity<>(teams, HttpStatus.OK);
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
