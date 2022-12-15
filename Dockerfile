@@ -1,7 +1,13 @@
-FROM openjdk:11-jdk-slim
+# Build the application first using Maven
+FROM maven:3.8-openjdk-11 as build
+WORKDIR /app
+COPY . .
+RUN mvn install
 
-ADD target/teams-service-0.0.1-SNAPSHOT.jar teams-service-0.0.1-SNAPSHOT.jar
-
-ENTRYPOINT ["java","-jar","/teams-service-0.0.1-SNAPSHOT.jar"]
-
+# Inject the JAR file into a new container to keep the file small
+FROM openjdk:11-jre-slim
+WORKDIR /app
+COPY --from=build /app/target/teams-service-0.0.1-SNAPSHOT.jar /app/app.jar
 EXPOSE 8082
+ENTRYPOINT ["sh", "-c"]
+CMD ["java -jar app.jar"]
