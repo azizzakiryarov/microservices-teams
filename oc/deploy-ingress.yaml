@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-team-service
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: addon-http-application-routing
+  rules:
+    - host: microservices-teams.apps.sandbox.x8i5.p1.openshiftapps.com
+    - http:
+        paths:
+          - path: /teams/add
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 8082
+          - path: /teams/getAll
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 8082
+          - path: /teams/get(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 8082
+          - path: /teams/update(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 8082
+          - path: /teams/delete(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 8082
