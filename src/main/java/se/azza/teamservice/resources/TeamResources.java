@@ -66,7 +66,7 @@ public class TeamResources {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping(path = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Team>> getAllTeams() {
 		List<Team> teams = teamService.getAllTeams();
 		return new ResponseEntity<>(teams, HttpStatus.OK);

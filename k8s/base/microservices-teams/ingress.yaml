@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-teams-ingress
+  namespace: microservices
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: local.microservices.teams.se
+      http:
+        paths:
+          - path: /teams/add
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 80
+          - path: /teams/get(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 80
+          - path: /teams/update(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 80
+          - path: /teams/delete(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 80
+          - path: /teams/getall
+            pathType: Prefix
+            backend:
+              service:
+                name: microservices-teams
+                port:
+                  number: 80
